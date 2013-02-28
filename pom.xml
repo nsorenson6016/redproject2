@@ -17,11 +17,6 @@
             <email>EEdgar@my.wctc.edu</email>
         </developer>
         <developer>
-            <id>nsorenson6016</id>
-            <name>Neal Sorenson</name>
-            <email>nsorenson@my.wctc.edu</email>
-        </developer>
-        <developer>
             <id>kfrizzelle</id>
             <name>Ken Frizzelle</name>
             <email>KFrizzelle@my.wctc.edu</email>
@@ -30,6 +25,11 @@
             <id>sodya4</id>
             <name>Scott Odya</name>
             <email>SOdya4@my.wctc.edu</email>
+        </developer>        
+        <developer>
+            <id>nsorenson6016</id>
+            <name>Neal Sorenson</name>
+            <email>nsorenson@my.wctc.edu</email>
         </developer>
     </developers>
     
@@ -63,7 +63,7 @@
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
-            <version>3.5</version>
+            <version>3.4.2</version>
         </dependency>
         
         <dependency>
