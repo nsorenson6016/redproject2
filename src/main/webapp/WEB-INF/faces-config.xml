@@ -7,5 +7,15 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
 
+    <application>
+        <!-- JSF-Spring Integration -->
+        <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
 
+    </application>
+    
+    <!-- for spring security -->
+    <lifecycle>
+        <phase-listener>edu.wctc.distjava.redproject2.util.LoginErrorPhaseListener</phase-listener>
+    </lifecycle>
+    
 </faces-config>

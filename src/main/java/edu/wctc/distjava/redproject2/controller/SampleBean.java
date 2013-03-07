@@ -1,7 +1,6 @@
-package edu.wctc.distjava.redproject.controller;
+package edu.wctc.distjava.redproject2.controller;
 
-import edu.wctc.distjava.redproject.model.Product;
-import edu.wctc.distjava.redproject.model.ProductEAO;
+import edu.wctc.distjava.redproject2.model.ProductEAO;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
@@ -22,9 +21,9 @@ public class SampleBean implements Serializable {
     
     private String message = "Hello From JSF Managed Bean";
     
-    @Inject
-    private ProductEAO eao;
-    
+//    @Inject
+//    private ProductEAO eao;
+//    
     /**
      * Creates a new instance of SampleBean
      */
@@ -39,7 +38,7 @@ public class SampleBean implements Serializable {
         this.message = message;
     }
     
-    public Product getProductById(String id){
-        return eao.getProductById(new Integer(id));
-    }
+//    public Product getProductById(String id){
+//        return eao.getProductById(new Integer(id));
+//    }
 }

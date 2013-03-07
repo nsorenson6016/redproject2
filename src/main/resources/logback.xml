@@ -9,7 +9,7 @@
     </appender>
 
     <!-- child level logging for application -->
-    <logger name="edu.wctc.distjava.blueproject" level="DEBUG" />
+    <logger name="edu.wctc.distjava.redproject2" level="DEBUG" />
 
     <!-- root level logging (children can override) -->
     <root level="INFO">
