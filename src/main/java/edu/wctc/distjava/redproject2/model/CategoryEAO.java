@@ -4,8 +4,6 @@
  */
 package edu.wctc.distjava.redproject2.model;
 
-import javax.ejb.Stateless;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -13,12 +11,8 @@ import javax.persistence.PersistenceContext;
  *
  * @author Neal
  */
-
-@Named
-@Stateless
-public class ProductEAO {
-    
-@PersistenceContext
+public class CategoryEAO {
+    @PersistenceContext
     private EntityManager em;
 
     public EntityManager getEntityManager() {
@@ -29,8 +23,7 @@ public class ProductEAO {
         this.em = em;
     }
     
-    public Product getProductById(Object id) {
-        return getEntityManager().find(Product.class, id);
+    public Category getCategoryById(Object id) {
+        return getEntityManager().find(Category.class, id);
     }
- 
 }
