@@ -5,6 +5,7 @@
 package edu.wctc.distjava.redproject2.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -16,11 +17,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -41,6 +44,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Product.findByEndDate", query = "SELECT p FROM Product p WHERE p.endDate = :endDate"),
     @NamedQuery(name = "Product.findByBuyNowPrice", query = "SELECT p FROM Product p WHERE p.buyNowPrice = :buyNowPrice")})
 public class Product implements Serializable {
+    @OneToMany(mappedBy = "productId")
+    private Collection<Bid> bidCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -195,6 +200,15 @@ public class Product implements Serializable {
     @Override
     public String toString() {
         return "edu.wctc.distjava.redproject2.model.Product[ productId=" + productId + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Bid> getBidCollection() {
+        return bidCollection;
+    }
+
+    public void setBidCollection(Collection<Bid> bidCollection) {
+        this.bidCollection = bidCollection;
     }
     
 }

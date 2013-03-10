@@ -46,6 +46,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Users.findByActiveDate", query = "SELECT u FROM Users u WHERE u.activeDate = :activeDate"),
     @NamedQuery(name = "Users.findByRoleId", query = "SELECT u FROM Users u WHERE u.roleId = :roleId")})
 public class Users implements Serializable {
+    @OneToMany(mappedBy = "bidderUsername")
+    private Collection<Bid> bidCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -256,6 +258,15 @@ public class Users implements Serializable {
     @Override
     public String toString() {
         return "edu.wctc.distjava.redproject2.model.Users[ username=" + username + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Bid> getBidCollection() {
+        return bidCollection;
+    }
+
+    public void setBidCollection(Collection<Bid> bidCollection) {
+        this.bidCollection = bidCollection;
     }
     
 }
