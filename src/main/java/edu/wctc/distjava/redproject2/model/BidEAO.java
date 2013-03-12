@@ -4,6 +4,8 @@
  */
 package edu.wctc.distjava.redproject2.model;
 
+import javax.ejb.Stateless;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -11,7 +13,11 @@ import javax.persistence.PersistenceContext;
  *
  * @author Neal
  */
+
+@Named
+@Stateless
 public class BidEAO {
+    
     @PersistenceContext
     private EntityManager em;
 

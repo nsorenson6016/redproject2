@@ -43,6 +43,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Product.findByStartDate", query = "SELECT p FROM Product p WHERE p.startDate = :startDate"),
     @NamedQuery(name = "Product.findByEndDate", query = "SELECT p FROM Product p WHERE p.endDate = :endDate"),
     @NamedQuery(name = "Product.findByBuyNowPrice", query = "SELECT p FROM Product p WHERE p.buyNowPrice = :buyNowPrice")})
+
 public class Product implements Serializable {
     @OneToMany(mappedBy = "productId")
     private Collection<Bid> bidCollection;
