@@ -20,6 +20,7 @@ public class SampleBean implements Serializable {
     private static final long serialVersionUID = 1L;
     
     private String message = "Hello From JSF Managed Bean";
+
     
 //    @Inject
 //    private ProductEAO eao;
