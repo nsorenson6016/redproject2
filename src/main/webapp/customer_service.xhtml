@@ -24,13 +24,23 @@
                 </h:inputText>
                 <h:message for="custEmail"/>
 
+                <h:outputText value="Subject "/>
+                <h:selectOneMenu value="subject">
+                    <f:selectItem itemValue ="Please choose a subject..."/>
+                    <f:selectItems value="#{csbean.categoryList}" />
+                </h:selectOneMenu>
+                <h:message for="subject"/>
+                
+                <h:outputText value="Message"/>
+                <h:inputTextarea id="message" rows="20" cols="50" validatorMessage="Please have a message">
+                    <f:validateRequired/>
+                </h:inputTextarea>
+                <h:message for="message"/>
 
                 <h:commandButton value="Submit" action="index" />
             </h:panelGrid>
 
         </h:form>
-
-
 
     </h:body> 
 </html>
