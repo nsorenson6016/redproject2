@@ -1,104 +1,36 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Customer Service</title>
     </h:head>
     <h:body>
-        <h:form id="custService" name="custService" method="post"
-                onsubmit="return validateEmail()"
-                >
-            <!--action ="EmailService" -->
-            
-            <table>
-                <tr>
-                    <th>
-                        <p align="right">Name:  </p> 
-                    </th>
-                    <th>
-                        <!-- textbox for customer name -->
-                        <input type="text" id="custName" name="custName" size="30px"
-                               style="float:left">
-                        </input>
-                    </th>
-                </tr> 
-                <tr>
-                    <th>
-                        <p align="right">Email:  </p> 
-                    </th>
-                    <th>
-                        <!-- textbox for email address, causes validation -->
-                        <input type="text" id="custEmail" name="custEmail" size="30px"
-                               style="float:left">
-                        </input>
-                    </th>
-                </tr> 
-                <tr>
-                    <th>
-                        <p style="float:right">Subject:</p> 
-                    </th>
-                    <!-- drop-down list of subjects-->
-                    <th>
-                        <select id ="custSubject" name="custSubject" size="1" style="float:left">
-                            <option value="itemQuestion">Buying an Item</option>
-                            <option value="itemQuestion">Selling an Item</option>
-                            <option value="itemQuestion">Question about an Item</option>
-                            <option value="itemQuestion">Technical Issues</option>
-                        </select>
-                    </th>
-                </tr>
-                <tr>
-                    <th valign="top">
-                        <p float="left">Message:  </p>
-                    </th>
-                    <th>
-                        <textarea id="custMessage" name="custMessage"
-                                  cols ="50" rows="20"
-                                  style="float:left" 
-                                  valign="top">
-                        </textarea>
-                    </th>
-                </tr>
-                <tr>
-                    <th> </th>
-                    <th>
-                        <input type="submit" id="messageSubmit" name="messageSubmit" 
-                               value="Submit Message" 
-                               style ="float:left"/>  
-                    </th>
-                </tr>
-            </table>
-        </h:form>
-        
-        <!--
-        function validateEmail - Validates that a valid email address has been
-                                 entered.
 
-                        Invalid data includes: a string without an @ or period.
-        -->
-        <script type="text/javascript">
-            function validateEmail(){
-                /*
-                var email = document.getElementById(custEmail);
-                var emptyEmail = "Please include an email address."
-                var invalidEmail = "Please make sure you enter a valid email address."
-                
-                if (email.value = ""){
-                    alert(emptyEmail);
-                    return false;
-                }
-                if ((email.value.indexOf ('@',0) == -1) ||
-                    email.value.indexOf ('.',0)){
-                    alert(invalidEmail);
-                    return false;
-                }
-                */
-                alert("OK");
-                return true;
-             }
-            
-        </script>
+        <h:form id="custService">
+
+            <h:panelGrid columns="3">
+
+                <h:outputText value="Enter Name"/>
+                <h:inputText id="custName" value="" validatorMessage="Name is required">
+                    <f:validateRequired/>
+                </h:inputText>
+                <h:message for="custName"/>
+
+                <h:outputText value="Enter Email"/>
+                <h:inputText id="custEmail" value="" validatorMessage="Please enter a valid email">
+                    <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+                </h:inputText>
+                <h:message for="custEmail"/>
+
+
+                <h:commandButton value="Submit" action="index" />
+            </h:panelGrid>
+
+        </h:form>
+
+
 
     </h:body> 
 </html>
