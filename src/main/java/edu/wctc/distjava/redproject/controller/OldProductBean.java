@@ -41,25 +41,25 @@ public class OldProductBean implements Serializable {
     private List<String> productNumbers;
     private String selectedProductNumber;
     private Product selectedProduct;
-    private Integer dropdownSelection;
+    private String dropdownSelection;
 
     public Product getProductById(String id){
         return ieao.getProductById(new Integer(id));
     }
 
     
-    public List<Product> processDropdownSelection(Integer id){
+    public List<Product> processDropdownSelection(){
         //System.out.println("category num passed in = " + category);
         //List<Product> list = ieao.productsByCategoryId(new Integer(category));
-        List<Product> list = ieao.getProductsByCategoryId(id);
+        List<Product> list = ieao.getProductsByCategoryId(new Integer(this.dropdownSelection));
         return list;
     }
 
-    public Integer getDropdownSelection() {
+    public String getDropdownSelection() {
         return dropdownSelection;
     }
 
-    public void setDropdownSelection(Integer dropdownSelection) {
+    public void setDropdownSelection(String dropdownSelection) {
         this.dropdownSelection = dropdownSelection;
     }
 
