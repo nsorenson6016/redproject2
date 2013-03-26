@@ -29,9 +29,25 @@ public class CategoryBean implements Serializable {
     private static final long serialVersionUID = 1L;
     
     private String message = "Hello From JSF Managed Bean";
+    private String dropdownSelection;
+    private String category_Id;
 
     @Inject
     private ICategoryEAO eao;
+
+    public String getDropdownSelection() {
+        return dropdownSelection;
+    }
+
+    public void setDropdownSelection(String dropdownSelection) {
+        this.dropdownSelection = dropdownSelection;
+    }
+    
+    public String processDropdownSelection(){
+        eao.getAllCategoryIds();
+        //return "productsListPage";
+        return "mainTemplate";
+    }
     
     /**
      * Creates a new instance of SampleBean
@@ -51,8 +67,20 @@ public class CategoryBean implements Serializable {
         return eao.getAllCategories();
     }
     
+    public List<Category> getAllCategoryIds(){
+        return eao.getAllCategoryIds();
+    }
+    
     public String getCategory(String id){
         return eao.getCategoryById(new Integer(id));
     }
+    
+    public String getCategory_Id() {
+        return category_Id;
+    }
+
+    public void setUser_Id(String category_Id) {
+        this.category_Id = category_Id;
+    } 
     
 }

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./mainTemplate.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns="http://www.w3.org/1999/xhmtl">
+
+    <ui:define name="content">
+        <h:form id="sitemap1">
+            <!--<h:outputLabel value="#{categoryBean.dropdownSelection}"/>-->
+            <h:dataTable id="empTable" rows="10" value="#{oldProductBean.getProductsByCategoryId('4')}"
+             var="emp" rowClasses="list-row-odd, list-row-even" width="60%">
+                <f:facet name="header">
+                    Standard JSF dataTable with row styling
+                </f:facet>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Last Name" />
+                    </f:facet>
+                    <h:outputText value="#{oldProductBean.product_name}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="First Name" />
+                    </f:facet>
+                    <h:outputText value="#{oldProductBean.description}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Hire Date" />
+                    </f:facet>
+                    <h:outputText value="#{oldProductBean.buy_now_price}"/>
+                   
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

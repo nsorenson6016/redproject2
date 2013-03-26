@@ -24,7 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 //@Scope("session")  // for interfaces.
 @Transactional(readOnly=true)
 
-public class CategoryEAO implements ICategoryEAO{
+public class BidEAO implements IBidEAO{
     @PersistenceContext
             //(unitName = "redproject2PU")
     private EntityManager em;
@@ -40,22 +40,46 @@ public class CategoryEAO implements ICategoryEAO{
     }
 
     @Override
-    public List<Category> getAllCategories() {
-        List orders = em.createNamedQuery("Category.findAllNames").getResultList();
-        return orders;
-    }
-   
-    @Override
-    public String getCategoryById(Object id) {
-        String category = (String) em.createNamedQuery("Category.findByCategoryId").setParameter("categoryId", id).getSingleResult();
-        return category;
+    public Bid getBidById(Object id) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public List<Category> getAllCategoryIds() {
-        List categories = em.createNamedQuery("Category.findAllCategoryIds").getResultList();
-        return categories;
+    public void create(Bid bid) {
+        em.persist(bid);
     }
+
+    @Override
+    public void update(Bid bid) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Bid findBid(Long id) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<Bid> findBidEntities() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<Bid> findBidEntities(int maxResults, int firstResult) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public int getBidCount() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<Bid> findBidEntitiesByStatus() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+  
     
     
 }

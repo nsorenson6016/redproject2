@@ -46,13 +46,12 @@ public class ProductEAO implements IProductEAO{
     /////////////////
     
     @Override
-    public List<Product> productsByCategory(Object category) {
+    public List<Product> getProductsByCategoryId(Integer id) {
         //Query query = em.createQuery("select * from product where category_id = :category");
         //query.setParameter("category", category);
         
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        cq.select(cq.from(Product.class));
-        Query q = em.createQuery(cq);
+        Query q = em.createNamedQuery("Product.findByCategoryId");
+        q.setParameter(1, id);
         return q.getResultList();
     }
     

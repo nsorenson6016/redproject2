@@ -10,7 +10,7 @@ public interface IProductEAO {
     
     Product getProductById(Object id);
     
-    List<Product> productsByCategory(Object category);
+    List<Product> getProductsByCategoryId(Integer id);
 
     void create(Product product);
 

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./mainTemplate.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns="http://www.w3.org/1999/xhtml">
+This page helps create a bid given that a registered member is already logged in.
+    <ui:define name="content">
+        <h:form id="bidCreatePage">
+            Insert short description of item
+            <h:inputText id="itemShortDescription" value="#{bidBean.shortDescription}"/><br/>
+            Insert long description of item
+            <h:inputTextarea id="itemLongDescription" value="#{bidBean.longDescription}"/><br/>
+            Insert desired category for the item
+            <h:selectOneMenu  style="height: 27px" value="#{categoryBean.dropdownSelection}">
+                                <f:selectItems value="#{categoryBean.allCategories}"/>
+            </h:selectOneMenu><br/>
+            Insert photo 1
+            
+            Insert photo 2
+            
+            Insert photo 3
+            
+            Insert the desired starting bid
+            <h:inputText id="startingBid" value="#{bidBean.startingBid}"/><br/>
+            Insert the desired ending bid date/time
+            <h:inputText id="endingDate" value="#{bidBean.endingDate}"/>
+            
+            //upon submission, the product id, bid id, and start date is generated.
+            <h:commandButton style="height: 27px;" id="submit" value="Submit" action="#{bidBean.createNewBid}"></h:commandButton>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

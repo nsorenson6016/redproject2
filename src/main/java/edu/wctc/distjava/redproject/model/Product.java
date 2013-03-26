@@ -9,6 +9,7 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,6 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
+    @NamedQuery(name = "Product.findByCategoryId", query = "SELECT p FROM Product p WHERE p.categoryId.categoryId = :categoryId"),
     @NamedQuery(name = "Product.findByProductId", query = "SELECT p FROM Product p WHERE p.productId = :productId"),
     @NamedQuery(name = "Product.findByShortDescription", query = "SELECT p FROM Product p WHERE p.shortDescription = :shortDescription"),
     @NamedQuery(name = "Product.findByLongDescription", query = "SELECT p FROM Product p WHERE p.longDescription = :longDescription"),
@@ -71,7 +73,7 @@ public class Product implements Serializable {
     @Column(name = "buy_now_price")
     private Long buyNowPrice;
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     private Category categoryId;
     @JoinColumn(name = "donating_username", referencedColumnName = "username")
     @ManyToOne
