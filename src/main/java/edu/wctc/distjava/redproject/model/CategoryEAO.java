@@ -41,7 +41,7 @@ public class CategoryEAO implements ICategoryEAO{
 
     @Override
     public List<Category> getAllCategories() {
-        List orders = em.createNamedQuery("Category.findAllNames").getResultList();
+        List orders = em.createNamedQuery("Category.findAll").getResultList();
         return orders;
     }
    

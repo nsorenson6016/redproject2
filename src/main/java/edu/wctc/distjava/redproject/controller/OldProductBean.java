@@ -2,13 +2,11 @@ package edu.wctc.distjava.redproject.controller;
 
 import edu.wctc.distjava.redproject.model.IProductEAO;
 import edu.wctc.distjava.redproject.model.Product;
-import edu.wctc.distjava.redproject.model.ProductEAO;
 import java.io.Serializable;
 import java.util.List;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 import javax.inject.Inject;
+import org.primefaces.event.SelectEvent;
 import org.springframework.context.annotation.Scope;
 
 /**
@@ -17,7 +15,7 @@ import org.springframework.context.annotation.Scope;
  * @version 1.00
  */
 @Named
-@Scope
+@Scope("session")
 public class OldProductBean implements Serializable {
     // Incremement this with each structural class change
     private static final long serialVersionUID = 1L;
@@ -37,29 +35,33 @@ public class OldProductBean implements Serializable {
     private String bid_count;
     private String donor_id;
     private String winner_id;
-    
+    private List<Product> foundProducts;
     private List<String> productNumbers;
     private String selectedProductNumber;
     private Product selectedProduct;
-    private String dropdownSelection;
+    private Integer dropdownSelection;
 
     public Product getProductById(String id){
         return ieao.getProductById(new Integer(id));
     }
 
+    public void handleItemSelect(SelectEvent event) {
+        
+    }
+            
     
-    public List<Product> processDropdownSelection(){
+    public String processDropdownSelection(){
         //System.out.println("category num passed in = " + category);
         //List<Product> list = ieao.productsByCategoryId(new Integer(category));
-        List<Product> list = ieao.getProductsByCategoryId(new Integer(this.dropdownSelection));
-        return list;
+        foundProducts = ieao.getProductsByCategoryId(dropdownSelection);
+        return null;
     }
 
-    public String getDropdownSelection() {
+    public Integer getDropdownSelection() {
         return dropdownSelection;
     }
 
-    public void setDropdownSelection(String dropdownSelection) {
+    public void setDropdownSelection(Integer dropdownSelection) {
         this.dropdownSelection = dropdownSelection;
     }
 
@@ -165,6 +167,38 @@ public class OldProductBean implements Serializable {
 
     public void setWinner_id(String winner_id) {
         this.winner_id = winner_id;
+    }
+
+    public List<Product> getFoundProducts() {
+        return foundProducts;
+    }
+
+    public void setFoundProducts(List<Product> foundProducts) {
+        this.foundProducts = foundProducts;
+    }
+
+    public List<String> getProductNumbers() {
+        return productNumbers;
+    }
+
+    public void setProductNumbers(List<String> productNumbers) {
+        this.productNumbers = productNumbers;
+    }
+
+    public String getSelectedProductNumber() {
+        return selectedProductNumber;
+    }
+
+    public void setSelectedProductNumber(String selectedProductNumber) {
+        this.selectedProductNumber = selectedProductNumber;
+    }
+
+    public Product getSelectedProduct() {
+        return selectedProduct;
+    }
+
+    public void setSelectedProduct(Product selectedProduct) {
+        this.selectedProduct = selectedProduct;
     }
     
     
