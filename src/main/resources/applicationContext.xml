@@ -111,5 +111,33 @@
        
     <!-- (Optional) Automatically receives and logs AuthenticationEvent messages -->
     <bean id="loggerListener" class="org.springframework.security.authentication.event.LoggerListener"/>
+    
+    <bean id="mailSender" 
+          class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com"/>
+        <property name="username" value="geemaildotcomsucks@gmail.com"/>
+        <property name="password" value="PAninth3@$$"/>
+        <property name="port" value="587"/>
+        <property name="javaMailProperties">
+            <props>
+                <!-- Use SMTP transport protocol -->
+                <prop key="mail.transport.protocol">smtp</prop>
+                <!-- Use SMTP-AUTH to authenticate to SMTP server -->
+                <prop key="mail.smtp.auth">true</prop>
+                <!-- Use TLS to encrypt communication with SMTP server -->
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.debug">true</prop>
+            </props>
+        </property>
+    </bean>
+    <!-- this is a template message that we can pre-load with default state -->
+    <bean id="templateMessage" 
+      class="org.springframework.mail.SimpleMailMessage">
+        <!-- if using Gmail, the from must be the address of the account holder 
+        -->
+        <property name="from" value="bitbay.auction@gmail.com"/>
+        <property name="subject" value="Bit Bay Registration - One More Step 
+Required"/>
+    </bean>
 
 </beans>

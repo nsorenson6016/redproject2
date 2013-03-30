@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Neal
  */
 @WebServlet(name = "EmailService", urlPatterns = {"/EmailService"})
-public class EmailService extends HttpServlet {
+public class EmailService extends HttpServlet { 
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

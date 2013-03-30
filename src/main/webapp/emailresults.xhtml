@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Email results page</title>
+    </h:head>
+    
+    <h:body>
+    <h:panelGrid columns="2">
+    
+        <h:outputLabel id="lblResults" value="Email results:" />
+        <h:message for="lblResults"/>
+        
+        <h:outputLabel id="lblEmail"  value="Email address:" />
+        <h:outputText value="#{emailbean.email}"/>
+        
+        <h:outputLabel id="lblSubject"  value="Subject:" />
+        <h:outputText value="#{emailbean.subject}" />
+        
+        <h:outputLabel id="lblMessage"  value="Message:" />
+        <h:outputText value="#{emailbean.message}" />
+        
+    </h:panelGrid>
+    </h:body>
+    
+</html>

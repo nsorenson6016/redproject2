@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -12,23 +13,42 @@
     </h:head>
 
     <h:body>
+        <div id="page_content">
+            <div id="header">
+                    <ui:include src="/header.xhtml"/>
+            </div>
+            
+            <div class="middle">
+                
+                <div id="sidebar">
+                    <ui:include src="/sidebar.xhtml"/>
+                </div>
 
-        <div id="header">
-            <ui:insert name="header">
-                <ui:include src="/header.xhtml"/>
-            </ui:insert>
-        </div>
+                <div id="main_content" class="main_content">
+                    
+                        <h:form class="search">
+                            <h:inputText style="line-height: 25px; width: 293px;
+                                         margin-top: -3px">Text</h:inputText>
+                            <h:selectOneMenu value="Categories" style="height: 27px"> 
+                                <f:selectItem itemLabel="Categories"/> 
+                                <f:selectItem itemLabel="Categories"/>
+                                <f:selectItem itemLabel="Categories"/>
+                            </h:selectOneMenu>
+                            <h:commandButton style="height: 27px;" id="submit" value="Search"></h:commandButton>
+                        </h:form>
+                    
+                    <ui:insert name="content">
+                        Default Content
+                    </ui:insert>
 
-        <div id="content" class="center_content">
-            <ui:insert name="content">Content</ui:insert>
-        </div>
+                </div>
+            </div>
+            <div id="footer">
 
-        <div id="footer">
-            <ui:insert name="footer">
                 <ui:include src="/footer.xhtml"/>
-            </ui:insert>
-        </div>
 
+            </div>
+        </div>
     </h:body>
 
 </html>
