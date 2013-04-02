@@ -1,5 +1,6 @@
-package edu.wctc.distjava.redproject.model;
+package edu.wctc.distjava.redproject.eao;
 
+import edu.wctc.distjava.redproject.model.Bid;
 import java.util.List;
 
 /**

@@ -1,6 +1,7 @@
-package edu.wctc.distjava.redproject.model;
+package edu.wctc.distjava.redproject.eao;
 
 //import javax.ejb.Stateless;
+import edu.wctc.distjava.redproject.model.Category;
 import java.util.List;
 import javax.inject.Named;
 import javax.persistence.EntityManager;

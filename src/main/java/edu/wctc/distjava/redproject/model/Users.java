@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.wctc.distjava.redproject.model;
 
 import java.io.Serializable;
@@ -96,8 +92,8 @@ public class Users implements Serializable {
     private Date activeDate;
     @Column(name = "role_id")
     private Integer roleId;
-    @OneToMany(mappedBy = "donatingUsername")
-    private Collection<Product> productCollection;
+//    @OneToMany(mappedBy = "donatingUsername")
+//    private Collection<Product> productCollection;
 
     public Users() {
     }
@@ -225,13 +221,13 @@ public class Users implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Product> getProductCollection() {
-        return productCollection;
-    }
-
-    public void setProductCollection(Collection<Product> productCollection) {
-        this.productCollection = productCollection;
-    }
+//    public Collection<Product> getProductCollection() {
+//        return productCollection;
+//    }
+//
+//    public void setProductCollection(Collection<Product> productCollection) {
+//        this.productCollection = productCollection;
+//    }
 
     @Override
     public int hashCode() {
@@ -259,3 +255,4 @@ public class Users implements Serializable {
     }
     
 }
+

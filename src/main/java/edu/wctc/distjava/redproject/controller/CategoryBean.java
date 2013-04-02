@@ -1,11 +1,11 @@
 package edu.wctc.distjava.redproject.controller;
 
 import edu.wctc.distjava.redproject.model.Category;
-import edu.wctc.distjava.redproject.model.ICategoryEAO;
+import edu.wctc.distjava.redproject.eao.ICategoryEAO;
 import edu.wctc.distjava.redproject.model.Product;
-import edu.wctc.distjava.redproject.model.ProductEAO;
+import edu.wctc.distjava.redproject.eao.IProductEAO;
 import edu.wctc.distjava.redproject.model.Worker;
-import edu.wctc.distjava.redproject.model.WorkerEAO;
+import edu.wctc.distjava.redproject.eao.WorkerEAO;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;

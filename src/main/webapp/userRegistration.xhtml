@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--*************************************************************************
+
+CREATED BY: Ken Frizzelle
+CREATED ON: 2/28/13
+
+**************************************************************************-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/mainTemplate.xhtml"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="content">
+        <div align="center">
+        <h1>User Registration</h1>
+        
+        <h:outputText value="Please enter the following information."/><br />
+        <h:outputText value="*required fields" style="color:red"/>
+        <h:form>
+            
+            <h:panelGrid columns="2" cellpadding="2" >
+                
+                       
+                    <h:outputText value="Username: *" style="float:right" />
+                    <h:panelGroup>
+                    <p:inputText id="username" value="#{userRegistrationBean.username}" required="true">  
+                        <p:ajax event="keyup" update="out"   
+                        listener="#{userRegistrationBean.isUsernameInUse}"/>  
+                    </p:inputText>  
+                       
+                        <h:outputText id="out" value="#{userRegistrationBean.userMessage}" />  
+                    </h:panelGroup>
+                <h:outputText value="Password: *" style="float:right"/>
+                <p:password id="passwordText" value="#{userRegistrationBean.password}"/>
+                    
+                <h:outputText value="Confirm Password: *" style="float:right"/>
+                <p:password id="confirmationText" value="#{userRegistrationBean.confirmation}"/>
+                    
+                <h:outputText value="Email Address: *" style="float:right"/>
+                <p:inputText id="emailText" value="#{userRegistrationBean.email}"/>
+                    
+                <h:outputText value="First Name:" style="float:right"/>
+                <p:inputText id="firstNameText" value="#{userRegistrationBean.firstName}"/>            
+                                    
+                <h:outputText value="Last Name: *" style="float:right"/>
+                <p:inputText id="lastNameText" value="#{userRegistrationBean.lastName}"/>
+                    
+                <h:outputText value="Phone Number: *" style="float:right" />
+                <p:inputText id="phoneNumberText" value="#{userRegistrationBean.phoneNum}"/>
+                
+                <h:outputText value="Address 1: *" style="float:right" />
+                <p:inputText id="address" value="#{userRegistrationBean.address}"/>
+                
+                <h:outputText value="Address 2: " style="float:right" />
+                <p:inputText id="addressTwo" value="#{userRegistrationBean.addressTwo}"/>
+                
+                <h:outputText value="City: *" style="float:right" />
+                <p:inputText id="city" value="#{userRegistrationBean.city}"/>
+                
+                <h:outputText value="State: *" style="float:right" />
+                <p:inputText id="state" value="#{userRegistrationBean.state}"/>
+                
+                <h:outputText value="Zip Code: *" style="float:right" />
+                <p:inputText id="zipCode" value="#{userRegistrationBean.zipCode}"/>
+                    
+            </h:panelGrid>
+            
+            <h:commandButton id="submit" value="Submit" action="#{userRegistrationBean.processForm}"/>       
+            
+        </h:form>
+        </div>
+    </ui:define>
+</ui:composition>

@@ -1,6 +1,7 @@
-package edu.wctc.distjava.redproject.model;
+package edu.wctc.distjava.redproject.eao;
 
 //import javax.ejb.Stateless;
+import edu.wctc.distjava.redproject.model.Worker;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

@@ -16,6 +16,7 @@
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
     border-bottom: solid 2px #476BB2;
+    background: url(/redproject2/faces/resources/images/logo.png);
 }
 
 #header a:link, #header a:visited {

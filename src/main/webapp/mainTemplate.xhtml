@@ -29,13 +29,13 @@
                         <h:form class="search">
                             <h:inputText style="line-height: 25px; width: 293px;
                                          margin-top: -3px">Text</h:inputText>
-                            <h:selectOneMenu  style="height: 27px" value="#{oldProductBean.dropdownSelection}">
+                            <h:selectOneMenu  style="height: 27px" value="#{productBean.dropdownSelection}">
                                 <f:selectItems value="#{categoryBean.allCategories}" var="c"
                                                itemLabel="#{c.categoryName}" 
                                                itemValue="#{c.categoryId}" />
                                 
                             </h:selectOneMenu>
-                            <h:commandButton style="height: 27px;" id="submit" value="Search" action="#{oldProductBean.processDropdownSelection()}"></h:commandButton>
+                            <h:commandButton style="height: 27px;" id="submit" value="Search" action="#{productBean.processDropdownSelection()}"></h:commandButton>
                         </h:form>
                     <ui:insert name="content">
                         Default Content

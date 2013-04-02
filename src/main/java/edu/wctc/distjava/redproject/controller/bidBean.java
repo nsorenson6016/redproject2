@@ -4,7 +4,7 @@
  */
 package edu.wctc.distjava.redproject.controller;
 
-import edu.wctc.distjava.redproject.model.IBidEAO;
+import edu.wctc.distjava.redproject.eao.IBidEAO;
 import edu.wctc.distjava.redproject.model.Product;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;

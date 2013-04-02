@@ -1,6 +1,7 @@
-package edu.wctc.distjava.redproject.model;
+package edu.wctc.distjava.redproject.eao;
 
 //import javax.ejb.Stateless;
+import edu.wctc.distjava.redproject.model.Product;
 import java.util.List;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
@@ -115,4 +116,5 @@ public class ProductEAO implements IProductEAO{
     public void deleteProduct(Product product) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
 }

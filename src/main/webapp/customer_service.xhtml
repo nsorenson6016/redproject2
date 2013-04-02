@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/mainTemplate.xhtml">
+    <ui:define name="content">
+    <h:head>
+        <title>Customer Service</title>
+    </h:head>
+    <h:body>
+
+        <h:form id="custService" action="emailresults"> 
+
+            <h:panelGrid columns="3">
+
+                <h:outputText value="Enter Name"/>
+                <h:inputText id="custName" 
+                             name="custName" validatorMessage="Name is required">
+                    <f:validateRequired/>
+                </h:inputText>
+                <h:message for="custName" style="color:red;"/>
+
+                <h:outputText value="Enter Email"/>
+                <h:inputText id="custEmail"
+                             value="#{emailbean.email}" validatorMessage="Please enter a valid email">
+                    <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+                </h:inputText>
+                <h:message for="custEmail" style="color:red;"/>
+
+                <h:outputText value="Subject "/>
+                <h:selectOneMenu id="custSubject"
+                                 value="#{emailbean.subject}">
+                    <f:validateRequired />
+                    <f:selectItem itemValue ="Please choose a subject..."/>
+                    <f:selectItems value="#{csbean.categoryList}" />
+                </h:selectOneMenu>
+                <h:message for="custSubject" style="color:red;"/>
+                
+                <h:outputText value="Message"/>
+                <h:inputTextarea id="custMessage" rows="20" cols="50" value="#{emailbean.message}"
+                                 validatorMessage="Please have a message">
+                    <f:validateRequired/>
+                </h:inputTextarea>
+                <h:message for="message" style="color:red;"/>
+
+                <h:commandButton value="Submit" id="btnSubmit" action="#{emailbean.processInfo}"/>
+            </h:panelGrid>
+
+        </h:form>
+
+    </h:body> 
+   </ui:define>
+</ui:composition>
+
