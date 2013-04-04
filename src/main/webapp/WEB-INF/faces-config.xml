@@ -15,7 +15,7 @@
     
     <!-- for spring security -->
     <lifecycle>
-        <phase-listener>edu.wctc.distjava.redproject2.util.LoginErrorPhaseListener</phase-listener>
+        <phase-listener>edu.wctc.distjava.redproject.util.LoginErrorPhaseListener</phase-listener>
     </lifecycle>
     
 </faces-config>

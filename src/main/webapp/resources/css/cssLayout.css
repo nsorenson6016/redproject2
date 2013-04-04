@@ -1,31 +1,106 @@
+/*
+ * This css file is used to format the content of a website project for Distributed
+ * Java at Waukesha County Technical College.
+ *
+ * Original author: Emma Edgar
+ * Last modified: 2/24/2013
+ */
 
-#top {
+/*************HEADER*************/
+#header {
     position: relative;
-    background-color: #036fab;
+    background-color: #ECECE3;
+    color: black;
+    height: 150px;
+    padding: 5px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom: solid 2px #476BB2;
+    background: url(/redproject2/faces/resources/images/logo.png);
+}
+
+#header a:link, #header a:visited {
+  color: white;
+  font-weight : bold;
+  text-decoration: none;
+}
+
+#header a:link:hover, #header a:visited:hover  {
+  color: black;
+  font-weight : bold;
+  text-decoration : underline;
+}
+
+#login{
+    position:absolute;
+    top: 15px;
+    right: 20px;
+    background-color: #476BB2;
+    height: 50px;
+    border-radius: 10px;
+}
+
+#login p{
+    color:white;
+    padding: 6px;
+    text-align: center;
+}
+
+#login p a{
     color: white;
-    padding: 5px;
-    margin: 0px 0px 10px 0px;
 }
 
-#bottom {
+#login p a:link:hover{
+    box-shadow:10px !important;
+}
+
+/************FOOTER**********/
+#footer {
     position: relative;
-    background-color: #c2dfef;
+    background-color: #ECECE3;
     padding: 5px;
-    margin: 10px 0px 0px 0px;
+    height: 60px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: #476BB2;
 }
 
-#left {
+#footer p{
+    color: white;
+}
+
+#footer a{
+    color: #ECECE3;
+}
+
+/***********SIDEBAR***********/
+#sidebar{
     float: left;
-    background-color: #ece3a5;
+    background-color: #ECECE3;
     padding: 5px;
     width: 150px;
 }
 
-#right {
-    float: right;
-    background-color: #ece3a5;
+.sidebar_content {
     padding: 5px;
-    width: 150px;
+    color: white;
+    
+}
+
+
+/*********MAIN CONTENT*********/
+
+#main_content{
+    background-color: #ECECE3;
+    border-left: solid 2px #476BB2;
+}
+
+#page_content{
+    width: 1000px;
+    margin-right: auto;
+    margin-left: auto;
+    border: solid 2px #476BB2;
+    border-radius: 10px;
 }
 
 .center_content {
@@ -34,28 +109,76 @@
     padding: 5px;
 }
 
-.left_content {
-    background-color: #dddddd;
+.main_content{
+    width: 824px;
     padding: 5px;
-    margin-left: 170px;
+    margin-left: 162px;
 }
 
-.right_content {
-    background-color: #dddddd;
+.middle{
+    background-color: #ECECE3;
+}
+
+
+
+.search{
+    width: 70%;
+    background-color: #AFAFAF;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 10px;
+    height: 27px;
     padding: 5px;
-    margin: 0px 170px 0px 170px;
+    text-align: center;
 }
 
-#top a:link, #top a:visited {
-  color: white;
-  font-weight : bold;
-  text-decoration: none;
+.slider{
+    width: 700px;
+    height: 200px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 20px;
+    position: relative;
+    border: solid 2px #476BB2;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-#top a:link:hover, #top a:visited:hover  {
-  color: black;
-  font-weight : bold;
-  text-decoration : underline;
+.slider img{
+    width: 700px;
+    height: 200px;
 }
 
+/********FEATURED PRODUCTS***********/
+.featured_products{
+  clear:both;
+  text-align: center;
+}
+.featured_products .product{
+    border: solid 2px #476BB2;
+    width: 200px;
+    height: 250px;
+    float:left;
+    margin: 35px;
+    position: relative;
+    border-radius: 10px;
+}
 
+.featured_products .product img{
+    max-width: 185px;
+    max-height: 185px;
+    margin-top: 7px;
+}
+
+.featured_products .product .caption{
+    position: absolute;
+    padding: 5px;
+    bottom: 0px;
+    background-color: #476BB2;
+    color: white;
+    width: 192px;
+    height: 30px;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+}

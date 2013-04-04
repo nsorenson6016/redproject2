@@ -26,8 +26,8 @@
 ">
     
     <!-- Scans within the base package of the application for @Components to configure as beans -->
-    <context:component-scan base-package="edu.wctc.distjava.redproject2">
-        <context:exclude-filter type="regex" expression="edu\.wctc\.distjava\.redproject2\.util.*" />
+    <context:component-scan base-package="edu.wctc.distjava.redproject">
+        <context:exclude-filter type="regex" expression="edu\.wctc\.distjava\.redproject\.util.*" />
     </context:component-scan>
     <context:annotation-config/>
 
@@ -88,12 +88,12 @@
  
     <bean id="entityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="persistenceUnitName" value="redproject2PU"/>
-        <property name="packagesToScan" value="edu.wctc.distjava.redproject2.model"/>
+        <property name="persistenceUnitName" value="redprojectPU"/>
+        <property name="packagesToScan" value="edu.wctc.distjava.redproject.model"/>
         <property name="dataSource" ref="dataSource" />
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <!--<property name="showSql" value="false" /> -->
+                <property name="showSql" value="false" />
                 <property name="generateDdl" value="false" />
                 <property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect"/>
             </bean>
@@ -104,41 +104,12 @@
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
     
-    <tx:annotation-driven transaction-manager="transactionManager" />
+    <tx:annotation-driven transaction-manager="transactionManager" />   
     <aop:config>
-        <aop:pointcut id="allServiceMethods" expression="execution(* edu.wctc.distjava.redproject2.model.*.*(..))"/>
-    </aop:config>  
-       
+        <aop:pointcut id="allServiceMethods" expression="execution(* edu.wctc.distjava.redproject.model.*.*(..))"/>
+    </aop:config> 
+           
     <!-- (Optional) Automatically receives and logs AuthenticationEvent messages -->
     <bean id="loggerListener" class="org.springframework.security.authentication.event.LoggerListener"/>
-    
-<!-- THIS IS THE START OF THE EMAIL ADDITION OF THE EMAIL BEAN STUFF -->
-    <bean id="mailSender" 
-          class="org.springframework.mail.javamail.JavaMailSenderImpl">
-        <property name="host" value="smtp.gmail.com"/>
-        <property name="username" value="geemaildotcomsucks@gmail.com"/>
-        <property name="password" value="PAninth3@$$"/>
-        <property name="port" value="587"/>
-        <property name="javaMailProperties">
-            <props>
-                <!-- Use SMTP transport protocol -->
-                <prop key="mail.transport.protocol">smtp</prop>
-                <!-- Use SMTP-AUTH to authenticate to SMTP server -->
-                <prop key="mail.smtp.auth">true</prop>
-                <!-- Use TLS to encrypt communication with SMTP server -->
-                <prop key="mail.smtp.starttls.enable">true</prop>
-                <prop key="mail.debug">true</prop>
-            </props>
-        </property>
-    </bean>
-    <!-- this is a template message that we can pre-load with default state -->
-    <bean id="templateMessage" 
-      class="org.springframework.mail.SimpleMailMessage">
-        <!-- if using Gmail, the from must be the address of the account holder 
-        -->
-        <property name="from" value="geemaildotcomsucks@gmail.com"/>
-        <property name="subject" value="bit AWEctions - Confirmation Required"/>
-    </bean>
-<!-- THIS IS THE END OF THE EMAIL ADDITION OF THE EMAIL BEAN STUFF -->
 
 </beans>

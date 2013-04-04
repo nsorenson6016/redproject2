@@ -8,7 +8,8 @@
          However, note that "java:app/" is mandatory. Make sure that the
          jndi-name is used in your "META-INF/persistence.xml" file.
     -->
-  <jdbc-resource enabled="true" jndi-name="java:app/jdbc/auctiondb" 
+  <!--<jdbc-resource enabled="true" jndi-name="java:app/jdbc/redproject2PU"-->
+  <jdbc-resource enabled="true" jndi-name="java:app/jdbc/auctiondb"
                  object-type="user" pool-name="java:app/auctiondb_pool">
         <description>The JNDI resource name for the auctiondb connection pool</description>
   </jdbc-resource>
@@ -41,7 +42,6 @@
                         validate-atmost-once-period-in-seconds="0" wrap-jdbc-objects="false">
     <property name="URL" value="jdbc:mysql://localhost:3306/auctiondb?zeroDateTimeBehavior=convertToNull"/>
     <property name="User" value="root"/>
-    <property name="Password" value=""/>
+    <property name="Password" value="admin"/>
   </jdbc-connection-pool>
 </resources>
-

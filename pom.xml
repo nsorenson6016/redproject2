@@ -12,28 +12,28 @@
     
     <developers>
         <developer>
-            <id>eedgar12</id>
+            <id>sodya4</id>
+            <name>Scott Odya</name>
+            <email>sodya4@my.wctc.edu</email>
+        </developer>
+        <developer>
+            <id>eedgar</id>
             <name>Emma Edgar</name>
-            <email>EEdgar@my.wctc.edu</email>
+            <email>eedgar@my.wctc.edu</email>
+        </developer>
+        <developer>
+            <id>nsorenson</id>
+            <name>Neal Sorenson</name>
+            <email>wsoehrmann@my.wctc.edu</email>
         </developer>
         <developer>
             <id>kfrizzelle</id>
             <name>Ken Frizzelle</name>
-            <email>KFrizzelle@my.wctc.edu</email>
-        </developer>
-        <developer>
-            <id>sodya4</id>
-            <name>Scott Odya</name>
-            <email>SOdya4@my.wctc.edu</email>
-        </developer>        
-        <developer>
-            <id>nsorenson6016</id>
-            <name>Neal Sorenson</name>
-            <email>nsorenson@my.wctc.edu</email>
+            <email>jgollakner@my.wctc.edu</email>
         </developer>
     </developers>
     
-      <!--
+    <!--
         INSTRUCTIONS FOR ADDING SPRING SUPPORT:
         
         Copy everything from here to the bottom and paste over your
@@ -388,6 +388,17 @@
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
             <version>3.2.1</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.1</version>
         </dependency>
         
         <!--

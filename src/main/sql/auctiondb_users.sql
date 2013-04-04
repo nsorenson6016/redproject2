@@ -2,7 +2,7 @@ CREATE DATABASE  IF NOT EXISTS `auctiondb` /*!40100 DEFAULT CHARACTER SET utf8 *
 USE `auctiondb`;
 -- MySQL dump 10.13  Distrib 5.1.34, for apple-darwin9.5.0 (i386)
 --
--- Host: 127.0.0.1    Database: auctiondb
+-- Host: 127.0.0.1    Database: bitbay_auction
 -- ------------------------------------------------------
 -- Server version	5.5.13
 
