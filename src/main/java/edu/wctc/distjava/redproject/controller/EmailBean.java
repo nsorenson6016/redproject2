@@ -1,5 +1,7 @@
 package edu.wctc.distjava.redproject.controller;
 
+import edu.wctc.distjava.redproject.service.CustServiceEmailer;
+import edu.wctc.distjava.redproject.service.IEmailer;
 import javax.inject.Named;
 import org.springframework.context.annotation.Scope;
 
@@ -41,8 +43,12 @@ public class EmailBean {
         this.message = message;
     }
     
-    public String processInfo(){
-        return "emailresults";
+    public String sendMail(){
+        String destination = "index";
+        
+        IEmailer cse = new CustServiceEmailer();
+        cse.emailMessage(email, subject);
+        
+        return destination;
     }
-    
 }

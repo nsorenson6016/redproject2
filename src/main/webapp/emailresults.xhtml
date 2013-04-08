@@ -12,9 +12,10 @@ and open the template in the editor.
     </h:head>
     
     <h:body>
+ 
     <h:panelGrid columns="2">
     
-        <h:outputLabel id="lblResults" value="Email results:" />
+        <h:outputLabel id="lblResults" value="Are you sure you want to send this email?" />
         <h:message for="lblResults"/>
         
         <h:outputLabel id="lblEmail"  value="Email address:" />
@@ -25,6 +26,14 @@ and open the template in the editor.
         
         <h:outputLabel id="lblMessage"  value="Message:" />
         <h:outputText value="#{emailbean.message}" />
+        
+        <h:form id="sender" action="index">
+        <h:commandButton id="send" value="Send Email" 
+                         action="#{emailbean.sendMail()}"/>
+        <h:commandButton id="cancel" value="Cancel" 
+                         action="#{webBean.toCustServ}"/>
+        
+        </h:form>
         
     </h:panelGrid>
     </h:body>
