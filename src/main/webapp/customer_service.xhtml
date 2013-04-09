@@ -11,7 +11,7 @@
     </h:head>
     <h:body>
 
-        <h:form id="custService" action="emailresults"> 
+        <h:form id="custService" action="emailresults" > 
 
             <h:panelGrid columns="3">
 
@@ -21,7 +21,6 @@
                     <f:validateRequired/>
                 </h:inputText>
                 <h:message for="custName" style="color:red;"/>
-
                 <h:outputText value="Enter Email"/>
                 <h:inputText id="custEmail"
                              value="#{emailbean.email}" validatorMessage="Please enter a valid email">
@@ -31,8 +30,8 @@
 
                 <h:outputText value="Subject "/>
                 <h:selectOneMenu id="custSubject"
-                                 value="#{emailbean.subject}">
-                    <f:validateRequired />
+                                 value="#{emailbean.subject}" validatorMessage="Please choose a subject"
+                                 validator="#{emailbean.validate}">
                     <f:selectItem itemValue ="Please choose a subject..."/>
                     <f:selectItems value="#{csbean.categoryList}" />
                 </h:selectOneMenu>
@@ -47,8 +46,7 @@
 
                 <h:commandButton value="Submit" id="btnSubmit" action="#{webBean.toEmailResults()}"/>
             </h:panelGrid>
-
-        </h:form>
+    </h:form>
 
     </h:body> 
    </ui:define>

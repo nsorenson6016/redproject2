@@ -2,7 +2,6 @@ package edu.wctc.distjava.redproject.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javax.inject.Named;
 import org.slf4j.Logger;
@@ -36,4 +35,6 @@ public class CustServCategoryBean implements Serializable {
     public void setCategoryList(List<String> categoryList) {
         this.categoryList = categoryList;
     }
+    
+    
 }

@@ -24,6 +24,8 @@ public class CustServiceServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+                
+        IEmailer cse = new CustServiceEmailer();
 
         //Converts parameters to strings
         String custName = request.getParameter("custName");
@@ -33,16 +35,12 @@ public class CustServiceServlet extends HttpServlet {
         String contentsStr = "";
         
         try{
-            contentsStr = custName + "/n" +
-                    custEmail + "/n" +
-                    custSubject + "/n" +
-                    custMessage + "/n";
+            cse.emailMessage(custEmail, custSubject);
         } catch(Exception e){
             contentsStr = "Houston, we have a problem.";
         }
         
-        String destination = "/emailresults.html";
-        request.setAttribute("emailContents",contentsStr);
+        String destination = "/index.xhtml";
         RequestDispatcher view =
                 request.getRequestDispatcher(destination);
         view.forward(request, response);

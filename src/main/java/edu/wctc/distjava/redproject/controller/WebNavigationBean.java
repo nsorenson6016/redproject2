@@ -25,4 +25,10 @@ public class WebNavigationBean {
     public String toEmailResults(){
         return "emailresults";
     }
+    
+    public String toPolicies(){
+        return "policies";
+    }
+    
+    
 }
