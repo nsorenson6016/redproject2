@@ -7,6 +7,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
+import javax.swing.JOptionPane;
 import org.springframework.context.annotation.Scope;
 
 /**
@@ -53,7 +54,7 @@ public class EmailBean {
         
         emailer = new CustServiceEmailer();
         try{
-            emailer.emailMessage(this.message, this.subject);
+            emailer.sendEmail(this.message, this.subject);
         } catch (Exception e){
             destination = "policies";
         }

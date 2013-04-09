@@ -35,7 +35,7 @@ public class CustServiceServlet extends HttpServlet {
         String contentsStr = "";
         
         try{
-            cse.emailMessage(custEmail, custSubject);
+            cse.sendEmail(custEmail, custSubject);
         } catch(Exception e){
             contentsStr = "Houston, we have a problem.";
         }

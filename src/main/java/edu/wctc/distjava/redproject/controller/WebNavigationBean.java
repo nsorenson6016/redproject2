@@ -30,5 +30,7 @@ public class WebNavigationBean {
         return "policies";
     }
     
-    
+    public String toLogin(){
+        return "login";
+    }
 }

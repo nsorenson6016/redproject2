@@ -46,18 +46,19 @@ public class CustServiceEmailer implements IEmailer, Serializable{
         this.messageTemplate = messageTemplate;
     }    
     
-    /* emailMessage - requires what was entered in the email and subject fields 
+    /* sendEmail - requires what was entered in the email and subject fields 
      *                of the customer_service page.  Sets the To, Subject and 
      *                message for an email.  Then it sends the email, catching
      *                the NullPointerException.
     */
-    public void emailMessage(String askerAddress, Object subject)throws MailException{
+    @Override
+    public void sendEmail(String userEmail, Object data)throws MailException{
         String message = "Thank you for your inquiry.  We will get back to you"
                 + " within 48 hours.";
         
         SimpleMailMessage emailMsg = new SimpleMailMessage(this.messageTemplate);
-        emailMsg.setTo(askerAddress);
-        emailMsg.setSubject(subject.toString());
+        emailMsg.setTo(userEmail);
+        emailMsg.setSubject(data.toString());
         emailMsg.setText(message);
         try{
             sender.send(emailMsg);
