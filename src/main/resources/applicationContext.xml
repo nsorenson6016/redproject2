@@ -104,7 +104,7 @@
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
     
-    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+    <bean id="sender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="host" value="smtp.gmail.com"/>
         <property name="username" value="geemaildotcomsucks@gmail.com"/>
         <property name="password" value="wctc is fun"/>
@@ -123,7 +123,7 @@
     </bean>
     
     <!-- this is a template message that we can pre-load with default state -->
-    <bean id="templateMessage" 
+    <bean id="messageTemplate" 
       class="org.springframework.mail.SimpleMailMessage">
         <!-- if using Gmail, the from must be the address of the account holder 
         -->

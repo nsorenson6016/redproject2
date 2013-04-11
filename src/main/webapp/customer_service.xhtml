@@ -31,7 +31,7 @@
                 <h:outputText value="Subject "/>
                 <h:selectOneMenu id="custSubject"
                                  value="#{emailbean.subject}" validatorMessage="Please choose a subject"
-                                 validator="#{emailbean.validate}">
+                                 validator="#{csbean.validate}">
                     <f:selectItem itemValue ="Please choose a subject..."/>
                     <f:selectItems value="#{csbean.categoryList}" />
                 </h:selectOneMenu>

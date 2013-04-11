@@ -23,7 +23,8 @@ public class EndAuctionEmailer implements IEmailer, Serializable{
     @Autowired
     private SimpleMailMessage messageTemplate;
     
-    public void emailMessage(String message, Object data)throws MailException{
+    @Override
+    public void sendEmail(String userEmail, Object data)throws MailException{
         
     }
 }

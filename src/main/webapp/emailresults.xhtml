@@ -27,12 +27,11 @@ and open the template in the editor.
         <h:outputLabel id="lblMessage"  value="Message:" />
         <h:outputText value="#{emailbean.message}" />
         
-        <h:form id="sender" action="index">
+        <h:form id="sender">
         <h:commandButton id="send" value="Send Email" 
                          action="#{emailbean.sendMail}"/>
         <h:commandButton id="cancel" value="Cancel" 
                          action="#{webBean.toCustServ}"/>
-        
         </h:form>
         
     </h:panelGrid>

@@ -8,6 +8,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
 import javax.swing.JOptionPane;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 
 /**
@@ -16,12 +18,15 @@ import org.springframework.context.annotation.Scope;
  */
 
 @Named("emailbean")
-@Scope("request")
+@Scope("session")
 public class EmailBean {
     private String email;
     private String subject;
     private String message;
-    IEmailer emailer;
+
+ @Autowired
+ @Qualifier("custservice")
+    private IEmailer emailer;
     
     public EmailBean(){}
 
@@ -51,30 +56,16 @@ public class EmailBean {
     
     public String sendMail(){
         String destination = "index";
-        
-        emailer = new CustServiceEmailer();
-        try{
-            emailer.sendEmail(this.message, this.subject);
-        } catch (Exception e){
-            destination = "policies";
-        }
+        //emailer = new CustServiceEmailer();
+        emailer.sendEmail(email, subject);
+//        try{
+//            
+//        } catch (Exception e){
+//            
+//            destination = "policies";
+//        }
         
         return destination;        
     }
-    
-    /* validation for drop down menu in customer_service page.  If a subject
-     * hasn't been chosen, a validation message will appear after the drop
-     * down list.
-     */
-    
-    public void validate(FacesContext context, UIComponent component,
-			Object value) throws ValidatorException {
-        String choice = value.toString();
-        if (choice.equals("Please choose a subject...")){
-            FacesMessage invalidMessage = 
-                    new FacesMessage("Please choose a subject.",
-                    "Subject not chosen");
-            throw new ValidatorException(invalidMessage);
-        }
-	}
+
 }

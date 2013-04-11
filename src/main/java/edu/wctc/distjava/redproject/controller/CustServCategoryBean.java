@@ -3,6 +3,10 @@ package edu.wctc.distjava.redproject.controller;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,5 +40,20 @@ public class CustServCategoryBean implements Serializable {
         this.categoryList = categoryList;
     }
     
+        
+    /* validation for drop down menu in customer_service page.  If a subject
+     * hasn't been chosen, a validation message will appear after the drop
+     * down list.
+     */
     
+    public void validate(FacesContext context, UIComponent component,
+			Object value) throws ValidatorException {
+        String choice = value.toString();
+        if (choice.equals("Please choose a subject...")){
+            FacesMessage invalidMessage = 
+                    new FacesMessage("Please choose a subject.",
+                    "Subject not chosen");
+            throw new ValidatorException(invalidMessage);
+        }
+}
 }
