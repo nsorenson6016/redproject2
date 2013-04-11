@@ -17,7 +17,8 @@
 
                 <h:outputText value="Enter Name"/>
                 <h:inputText id="custName" 
-                             name="custName" validatorMessage="Name is required">
+                             name="custName" value="#{emailbean.name}"
+                             validatorMessage="Name is required">
                     <f:validateRequired/>
                 </h:inputText>
                 <h:message for="custName" style="color:red;"/>

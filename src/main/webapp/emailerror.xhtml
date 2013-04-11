@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/mainTemplate.xhtml">
+    <ui:define name="content">
+    <h:head>
+        <title>Email Error</title>
+    </h:head>
+        
+        <h:body>
+            We apologize.  There seems to be an error with our email.  We will 
+            work on rectifying this issue as soon as possible. 
+        </h:body>
+        
+        <h:form id="backToIndex">
+        <h:commandButton id="send" value="OK" 
+                         action="#{webBean.toIndex}"/>
+        </h:form>
+      
+    </ui:define>
+</ui:composition>

@@ -33,4 +33,5 @@ public class WebNavigationBean {
     public String toLogin(){
         return "login";
     }
+    
 }

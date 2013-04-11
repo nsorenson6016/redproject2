@@ -20,6 +20,7 @@ import org.springframework.context.annotation.Scope;
 @Named("emailbean")
 @Scope("session")
 public class EmailBean {
+    private String name;
     private String email;
     private String subject;
     private String message;
@@ -29,6 +30,14 @@ public class EmailBean {
     private IEmailer emailer;
     
     public EmailBean(){}
+    
+    public String getName(){
+        return name;
+    }
+    
+    public void setName(String name){
+        this.name = name;
+    }
 
     public String getEmail() {
         return email;
@@ -56,14 +65,12 @@ public class EmailBean {
     
     public String sendMail(){
         String destination = "index";
-        //emailer = new CustServiceEmailer();
-        emailer.sendEmail(email, subject);
-//        try{
-//            
-//        } catch (Exception e){
-//            
-//            destination = "policies";
-//        }
+        
+        try{
+            emailer.sendEmail(email, subject);
+        } catch (Exception e){
+            destination = "emailerror";
+        }
         
         return destination;        
     }
