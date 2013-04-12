@@ -17,11 +17,11 @@ import org.springframework.context.annotation.Scope;
  * @author Neal Sorenson
  */
 
-@Named("emailbean")
+@Named("custservemailbean")
 @Scope("session")
-public class EmailBean {
+public class CustServEmailBean {
     private String name;
-    private String email;
+    private String email; 
     private String subject;
     private String message;
 
@@ -29,7 +29,7 @@ public class EmailBean {
  @Qualifier("custservice")
     private IEmailer emailer;
     
-    public EmailBean(){}
+    public CustServEmailBean(){}
     
     public String getName(){
         return name;
@@ -68,6 +68,7 @@ public class EmailBean {
         
         try{
             emailer.sendEmail(email, subject);
+            emailer.emailHQ(name, email, subject, message);
         } catch (Exception e){
             destination = "emailerror";
         }

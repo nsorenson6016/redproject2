@@ -17,21 +17,21 @@
 
                 <h:outputText value="Enter Name"/>
                 <h:inputText id="custName" 
-                             name="custName" value="#{emailbean.name}"
+                             name="custName" value="#{custservemailbean.name}"
                              validatorMessage="Name is required">
                     <f:validateRequired/>
                 </h:inputText>
                 <h:message for="custName" style="color:red;"/>
                 <h:outputText value="Enter Email"/>
                 <h:inputText id="custEmail"
-                             value="#{emailbean.email}" validatorMessage="Please enter a valid email">
+                             value="#{custservemailbean.email}" validatorMessage="Please enter a valid email">
                     <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
                 </h:inputText>
                 <h:message for="custEmail" style="color:red;"/>
 
                 <h:outputText value="Subject "/>
                 <h:selectOneMenu id="custSubject"
-                                 value="#{emailbean.subject}" validatorMessage="Please choose a subject"
+                                 value="#{custservemailbean.subject}" validatorMessage="Please choose a subject"
                                  validator="#{csbean.validate}">
                     <f:selectItem itemValue ="Please choose a subject..."/>
                     <f:selectItems value="#{csbean.categoryList}" />
@@ -39,7 +39,7 @@
                 <h:message for="custSubject" style="color:red;"/>
                 
                 <h:outputText value="Message"/>
-                <h:inputTextarea id="custMessage" rows="20" cols="50" value="#{emailbean.message}"
+                <h:inputTextarea id="custMessage" rows="20" cols="50" value="#{custservemailbean.message}"
                                  validatorMessage="Please have a message">
                     <f:validateRequired/>
                 </h:inputTextarea>

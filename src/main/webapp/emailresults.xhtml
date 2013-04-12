@@ -18,17 +18,17 @@
         <h:message for="lblResults"/>
         
         <h:outputLabel id="lblEmail"  value="Email address:" />
-        <h:outputText value="#{emailbean.email}"/>
+        <h:outputText value="#{custservemailbean.email}"/>
         
         <h:outputLabel id="lblSubject"  value="Subject:" />
-        <h:outputText value="#{emailbean.subject}" />
+        <h:outputText value="#{custservemailbean.subject}" />
         
         <h:outputLabel id="lblMessage"  value="Message:" />
-        <h:outputText value="#{emailbean.message}" />
+        <h:outputText value="#{custservemailbean.message}" />
         
         <h:form id="sender">
         <h:commandButton id="send" value="Send Email" 
-                         action="#{emailbean.sendMail}"/>
+                         action="#{custservemailbean.sendMail}"/>
         <h:commandButton id="cancel" value="Cancel" 
                          action="#{webBean.toCustServ}"/>
         </h:form>

@@ -18,15 +18,15 @@ import org.springframework.stereotype.Service;
  * @author Neal Sorenson
  * @version 1.0
  */
-
 @Service("custServiceEmailer")
 @Qualifier("custservice")
-public class CustServiceEmailer implements IEmailer, Serializable{
+public class CustServiceEmailer implements IEmailer, Serializable {
+
     private static final long serialVersionUID = 1L;
+    private final String WORKEMAIL = "geemaildotcomsucks@gmail.com";
     
     @Autowired
     private MailSender sender;
-    
     @Autowired
     private SimpleMailMessage messageTemplate;
 
@@ -44,8 +44,8 @@ public class CustServiceEmailer implements IEmailer, Serializable{
 
     public void setMessageTemplate(SimpleMailMessage messageTemplate) {
         this.messageTemplate = messageTemplate;
-    }    
-    
+    }
+
     /* sendEmail - requires what was entered in the email and subject fields 
      *                of the customer_service page.  Sets the To, Subject and 
      *                message for an email.  Then it sends the email, catching
@@ -54,21 +54,37 @@ public class CustServiceEmailer implements IEmailer, Serializable{
      * variables: userEmail = user's email address
      *                 data = data entered in SUBJECT line in cuustomer_service
      *                        page
-    */
+     */
     @Override
-    public void sendEmail(String userEmail, Object data)throws MailException{
+    public void sendEmail(String userEmail, Object data) throws MailException {
         String message = ("Thank you for your inquiry.  We will get back to you"
                 + " within 48 hours.");
-        
+
         SimpleMailMessage emailMsg = new SimpleMailMessage(this.messageTemplate);
         String subject = data.toString();
         emailMsg.setTo(userEmail);
         emailMsg.setSubject(subject);
         emailMsg.setText(message);
+        try {
+            sender.send(emailMsg);
+        } catch (NullPointerException npe) {
+            throw new MailSendException("Email verification error");
+            }
+        }
+
+    public void emailHQ(String userName, String userEmail, 
+            String subject, String message) {
+        String emailMessage = ("User Name:  " + userName 
+                + "\nUser Email:  " + userEmail
+                + "\nMessage:  \n" + message);
+        SimpleMailMessage emailMsg = new SimpleMailMessage(this.messageTemplate);
+        emailMsg.setTo(WORKEMAIL);
+        emailMsg.setSubject(subject);
+        emailMsg.setText(message);
         try{
             sender.send(emailMsg);
         } catch (NullPointerException npe){
-            throw new MailSendException("Email verification error");
+            throw new MailSendException("Error sending email to home email.");
+        }
     }
-}
 }

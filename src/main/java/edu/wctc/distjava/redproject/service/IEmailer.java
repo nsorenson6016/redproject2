@@ -11,4 +11,5 @@ import org.springframework.mail.MailException;
  */
 public interface IEmailer {
     void sendEmail(String userEmail, Object data) throws MailException;
+    void emailHQ (String userName, String email, String subject, String message);
 }
