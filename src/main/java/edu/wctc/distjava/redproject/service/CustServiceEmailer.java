@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
 public class CustServiceEmailer implements IEmailer, Serializable {
 
     private static final long serialVersionUID = 1L;
-    private final String WORKEMAIL = "geemaildotcomsucks@gmail.com";
+    private final String HQ_EMAIL = "geemaildotcomsucks@gmail.com";
     
     @Autowired
     private MailSender sender;
@@ -76,11 +76,11 @@ public class CustServiceEmailer implements IEmailer, Serializable {
             String subject, String message) {
         String emailMessage = ("User Name:  " + userName 
                 + "\nUser Email:  " + userEmail
-                + "\nMessage:  \n" + message);
+                + "\n\nMessage:  \n" + message);
         SimpleMailMessage emailMsg = new SimpleMailMessage(this.messageTemplate);
-        emailMsg.setTo(WORKEMAIL);
+        emailMsg.setTo(HQ_EMAIL);
         emailMsg.setSubject(subject);
-        emailMsg.setText(message);
+        emailMsg.setText(emailMessage);
         try{
             sender.send(emailMsg);
         } catch (NullPointerException npe){
