@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -39,8 +41,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Users.findByFirstName", query = "SELECT u FROM Users u WHERE u.firstName = :firstName"),
     @NamedQuery(name = "Users.findByLastName", query = "SELECT u FROM Users u WHERE u.lastName = :lastName"),
     @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email"),
-    @NamedQuery(name = "Users.findByActiveDate", query = "SELECT u FROM Users u WHERE u.activeDate = :activeDate"),
-    @NamedQuery(name = "Users.findByRoleId", query = "SELECT u FROM Users u WHERE u.roleId = :roleId")})
+    @NamedQuery(name = "Users.findByActiveDate", query = "SELECT u FROM Users u WHERE u.activeDate = :activeDate")})
 public class Users implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -90,8 +91,8 @@ public class Users implements Serializable {
     @Column(name = "active_date")
     @Temporal(TemporalType.DATE)
     private Date activeDate;
-    @Column(name = "role_id")
-    private Integer roleId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "username", fetch=FetchType.EAGER, orphanRemoval=true)
+    private Collection<Authorities> authoritiesCollection;
 //    @OneToMany(mappedBy = "donatingUsername")
 //    private Collection<Product> productCollection;
 
@@ -212,13 +213,15 @@ public class Users implements Serializable {
         this.activeDate = activeDate;
     }
 
-    public Integer getRoleId() {
-        return roleId;
+    public Collection<Authorities> getAuthoritiesCollection() {
+        return authoritiesCollection;
     }
 
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
+    public void setAuthoritiesCollection(Collection<Authorities> authoritiesCollection) {
+        this.authoritiesCollection = authoritiesCollection;
     }
+
+
 
     @XmlTransient
 //    public Collection<Product> getProductCollection() {
@@ -255,4 +258,3 @@ public class Users implements Serializable {
     }
     
 }
-

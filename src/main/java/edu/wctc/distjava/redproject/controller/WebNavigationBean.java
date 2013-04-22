@@ -34,4 +34,7 @@ public class WebNavigationBean {
         return "login";
     }
     
+    public String toRegistration(){
+        return "userRegistration";
+    }
 }

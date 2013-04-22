@@ -4,11 +4,22 @@
  */
 package edu.wctc.distjava.redproject.controller;
 
+import edu.wctc.distjava.redproject.eao.IUserRegistrationEAO;
+import edu.wctc.distjava.redproject.model.Authorities;
+import edu.wctc.distjava.redproject.model.Users;
+import edu.wctc.distjava.redproject.service.IEmailer;
 import edu.wctc.distjava.redproject.service.UserRegistrationService;
+import edu.wctc.distjava.redproject.util.FacesUtils;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 
 /**
  *
@@ -17,7 +28,7 @@ import org.springframework.context.annotation.Scope;
 @Named
 @Scope("request")
 public class UserRegistrationBean implements Serializable{
-    private String username;
+    private String username = "";
     private String firstName;
     private String lastName;
     private String email;
@@ -30,21 +41,83 @@ public class UserRegistrationBean implements Serializable{
     private String state;
     private String zipCode;
     private String userMessage = "";
-    private String successMessage;
+    private String userCheck = "";
+    private String IN_USE = "Username is already in use!";
     @Inject
     private UserRegistrationService urService;
+    private Users user;
+   
+    @Autowired
+    @Qualifier("regservice")
+    private IEmailer emailer;
     
-    public String isUsernameInUse() {
+    public void usernameInUse(ValueChangeEvent event) {
+        user = new Users();
         
+        user.setUsername(username);
+        username = user.getUsername();
+        userCheck = urService.isUsernameInUse(username);
+        if(userCheck != null){
+            FacesUtils.addErrorMessage("Username is already in use!");
+        }
         
-        userMessage = null; //urService.isUsernameInUse(username);
-        
-        return userMessage;
         
   }
     
+    public void passwordsMatch(ValueChangeEvent event) {
+//       password = getPassword();
+//       confirmation = getConfirmation();
+       
+       if (password.equals(confirmation)){
+           FacesUtils.addErrorMessage("Passwords match.");
+       }else{
+           FacesUtils.addErrorMessage("Confirmation does not match password.");
+       }
+        
+    }
+    
+    private String encodeSha512(String pwd, String salt) {
+        
+        ShaPasswordEncoder pe = new ShaPasswordEncoder(512);
+        pe.setIterations(1024);
+        String hash = pe.encodePassword(pwd, salt);
+        
+        return hash;
+        
+    }
+    
     public String createNewUser (){
-        return successMessage;
+        user = new Users();
+        user.setUsername(username);
+        user.setPassword(encodeSha512(password, username));
+        user.setEmail(email);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setAddress1(address);
+        user.setAddress2(address);
+        user.setCity(city);
+        user.setState(state);
+        user.setZip(zipCode);
+        user.setEnabled(false);
+        List<Authorities> auths = new ArrayList<Authorities>();
+        Authorities auth = new Authorities();
+        auth.setAuthority("ROLE_MEMBER");
+        auths.add(auth);
+        user.setAuthoritiesCollection(auths);
+        auth.setUsername(user.getUsername());
+        String destination = "index";
+        
+        urService.createNewUser( user);
+        
+        try {
+            emailer.sendEmail(email, "");
+            emailer.emailHQ(username, email, (firstName + " " + lastName), "");
+        } catch (Exception e){
+            destination = "emailerror.xhtml";
+            System.out.println(e.toString());
+        }
+        
+        return destination;
     }
 
     
@@ -154,15 +227,6 @@ public class UserRegistrationBean implements Serializable{
         this.userMessage = userMessage;
     }
 
-    public String getSuccessMessage() {
-        return successMessage;
-    }
-
-    public void setSuccessMessage(String successMessage) {
-        this.successMessage = successMessage;
-    }
-
-
     public UserRegistrationService getUrService() {
         return urService;
     }
@@ -171,6 +235,12 @@ public class UserRegistrationBean implements Serializable{
         this.urService = urService;
     }
 
-    
-    
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
+
 }

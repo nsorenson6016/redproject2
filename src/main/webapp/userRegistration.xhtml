@@ -19,55 +19,62 @@ CREATED ON: 2/28/13
         <h:outputText value="Please enter the following information."/><br />
         <h:outputText value="*required fields" style="color:red"/>
         <h:form>
-            
+            <p:growl id="growl" life="7000"/>
             <h:panelGrid columns="2" cellpadding="2" >
                 
                        
                     <h:outputText value="Username: *" style="float:right" />
                     <h:panelGroup>
-                    <p:inputText id="username" value="#{userRegistrationBean.username}" required="true">  
-                        <p:ajax event="keyup" update="out"   
-                        listener="#{userRegistrationBean.isUsernameInUse}"/>  
+                        <p:inputText id="username" value="#{userRegistrationBean.username}" 
+                                     required="true" requiredMessage="Please enter a username." >  
+                       <p:ajax event="blur" update="growl"   
+                               listener="#{userRegistrationBean.usernameInUse(blur)}"/>  
                     </p:inputText>  
                        
-                        <h:outputText id="out" value="#{userRegistrationBean.userMessage}" />  
+                        
                     </h:panelGroup>
                 <h:outputText value="Password: *" style="float:right"/>
-                <p:password id="passwordText" value="#{userRegistrationBean.password}"/>
+                <p:password id="password" value="#{userRegistrationBean.password}"
+                            required="true" requiredMessage="Please enter a password."/>
                     
                 <h:outputText value="Confirm Password: *" style="float:right"/>
-                <p:password id="confirmationText" value="#{userRegistrationBean.confirmation}"/>
+                <p:password id="confirmation" value="#{userRegistrationBean.confirmation}"
+                            required="true" requiredMessage="Please confirm your password.">
+                    <p:ajax event="blur" update="growl"   
+                               listener="#{userRegistrationBean.passwordsMatch(blur)}"/>
+                </p:password>
                     
                 <h:outputText value="Email Address: *" style="float:right"/>
-                <p:inputText id="emailText" value="#{userRegistrationBean.email}"/>
+                <p:inputText id="emailText" value="#{userRegistrationBean.email}" required="true" requiredMessage="Please enter your email address."/>
                     
-                <h:outputText value="First Name:" style="float:right"/>
-                <p:inputText id="firstNameText" value="#{userRegistrationBean.firstName}"/>            
+                <h:outputText value="First Name: *" style="float:right"/>
+                <p:inputText id="firstNameText" value="#{userRegistrationBean.firstName}" required="true" requiredMessage="Please enter your first name."/>            
                                     
                 <h:outputText value="Last Name: *" style="float:right"/>
-                <p:inputText id="lastNameText" value="#{userRegistrationBean.lastName}"/>
+                <p:inputText id="lastNameText" value="#{userRegistrationBean.lastName}" required="true" requiredMessage="Please enter your last name."/>
                     
                 <h:outputText value="Phone Number: *" style="float:right" />
-                <p:inputText id="phoneNumberText" value="#{userRegistrationBean.phoneNum}"/>
+                <p:inputText id="phoneNumberText" value="#{userRegistrationBean.phoneNum}" required="true" requiredMessage="Please enter your phone number."/>
                 
                 <h:outputText value="Address 1: *" style="float:right" />
-                <p:inputText id="address" value="#{userRegistrationBean.address}"/>
+                <p:inputText id="address" value="#{userRegistrationBean.address}" required="true" requiredMessage="Please enter your address."/>
                 
                 <h:outputText value="Address 2: " style="float:right" />
                 <p:inputText id="addressTwo" value="#{userRegistrationBean.addressTwo}"/>
                 
                 <h:outputText value="City: *" style="float:right" />
-                <p:inputText id="city" value="#{userRegistrationBean.city}"/>
+                <p:inputText id="city" value="#{userRegistrationBean.city}" required="true" requiredMessage="Please enter your city."/>
                 
                 <h:outputText value="State: *" style="float:right" />
-                <p:inputText id="state" value="#{userRegistrationBean.state}"/>
+                <p:inputText id="state" value="#{userRegistrationBean.state}" required="true" requiredMessage="Please enter your state."/>
                 
                 <h:outputText value="Zip Code: *" style="float:right" />
-                <p:inputText id="zipCode" value="#{userRegistrationBean.zipCode}"/>
+                <p:inputText id="zipCode" value="#{userRegistrationBean.zipCode}" required="true" requiredMessage="Please enter your zip code."/>
                     
             </h:panelGrid>
-            
-            <h:commandButton id="submit" value="Submit" action="#{userRegistrationBean.processForm}"/>       
+            <h:selectBooleanCheckbox required="true" requiredMessage="You must accept the terms of service." />
+            <h:outputText style="margin-bottom: 25px; padding-bottom: 25px" value="I have read the user agreement and accept the terms of service."/><br />
+            <h:commandButton id="submit" value="Submit"  action="#{userRegistrationBean.createNewUser()}"/>       
             
         </h:form>
         </div>

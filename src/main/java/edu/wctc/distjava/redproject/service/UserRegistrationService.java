@@ -4,36 +4,38 @@
  */
 package edu.wctc.distjava.redproject.service;
 
-import edu.wctc.distjava.redproject.eao.UserRegistrationEAOI;
+import edu.wctc.distjava.redproject.eao.IUserRegistrationEAO;
+import edu.wctc.distjava.redproject.model.Users;
 import javax.inject.Inject;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- *
- * @author Owner
- */
 @Service
 @Scope(value="request", proxyMode=ScopedProxyMode.TARGET_CLASS)
 @Transactional(readOnly=true)
 public class UserRegistrationService {
     @Inject
-    UserRegistrationEAOI userRegEao;
+    IUserRegistrationEAO userRegEao;
     
-    public String isUsernamereInUse(String username) {
-        return null;
+    public String isUsernameInUse(String username) {
+        return userRegEao.isUsernameInUse(username);
+    }
+    
+    @Transactional(readOnly=false, rollbackFor=Exception.class)
+    public void createNewUser(Users user) {
+        userRegEao.createNewUser(user);
     }
     
     // If doing a write operation you must annotate your methods with
     // @Transactional(readOnly=false, rollbackFor=Exception.class)
 
-    public UserRegistrationEAOI getUserRegEao() {
+    public IUserRegistrationEAO getUserRegEao() {
         return userRegEao;
     }
 
-    public void setUserRegEao(UserRegistrationEAOI userRegEao) {
+    public void setUserRegEao(IUserRegistrationEAO userRegEao) {
         this.userRegEao = userRegEao;
     }
     
