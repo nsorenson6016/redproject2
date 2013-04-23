@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/plainTemplate.xhtml"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="content">
+        <meta http-equiv="refresh" content="12;url=index.xhtml" />
+        <div align="center">
+        <h:outputText style="padding-top: 100px; padding-bottom: 100px" value="Thank you for registering with bit Awections. 
+            An email has been sent with your confirmation link to complete your registry."/><br />
+            <h:outputText value="If you are not redirected within the next 10 seconds please "/> <h:link value="click here!" outcome="index"/>
+
+        </div>
+    </ui:define>
+</ui:composition>

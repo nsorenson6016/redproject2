@@ -105,12 +105,12 @@ public class UserRegistrationBean implements Serializable{
         auths.add(auth);
         user.setAuthoritiesCollection(auths);
         auth.setUsername(user.getUsername());
-        String destination = "index";
+        String destination = "registrationComplete";
         
         urService.createNewUser( user);
         
         try {
-            emailer.sendEmail(email, "");
+            emailer.sendEmail(email, username);
             emailer.emailHQ(username, email, (firstName + " " + lastName), "");
         } catch (Exception e){
             destination = "emailerror.xhtml";
