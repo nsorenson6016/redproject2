@@ -8,10 +8,12 @@
         <param-value>Development</param-value>
     </context-param>
     
-    <servlet-mapping>
+    
+<!--    <servlet-mapping>
         <servlet-name>RegistrationVerifier</servlet-name>
         <url-pattern>/regVerify.do</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
+    
     
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
