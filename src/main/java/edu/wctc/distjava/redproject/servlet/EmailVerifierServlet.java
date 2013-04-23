@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.wctc.distjava.redproject.servlet;
 
 import java.io.IOException;
@@ -13,11 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author Neal
+ * This servlet will be the destination of the email that is sent
+ * to new users to verify the user's email.  The servlet will then redirect the
+ * user to the verifyEmail web page, which will redirect to the login screen.
+ * 
+ * @author Neal Sorenson
  */
 @WebServlet(name = "emailVerifier", urlPatterns = {"/emailVerifier"})
-public class emailVerifier extends HttpServlet {
+public class EmailVerifierServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
 
     /**
      * Processes requests for both HTTP
@@ -32,19 +32,16 @@ public class emailVerifier extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet emailVerifier</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet emailVerifier at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {            
-            out.close();
+        String errorMessage = "";
+        String destination = "";
+        
+        try{
+            String username = request.getParameter("user"); //get parameter from email
+            // do a search for username in database
+            // if found, send
+            
+        } catch (Exception e){
+            errorMessage += e.toString();
         }
     }
 

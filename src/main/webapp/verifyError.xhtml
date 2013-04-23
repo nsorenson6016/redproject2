@@ -57,13 +57,9 @@
 
             <h:panelGrid columns="1" cellspacing="8">
                 <h:outputText style="font-size: xx-large;" value="Access Denied"/>
-                <h:outputText value="Either you haven't registered with us, your account is disabled, or you do not have access to certain secured pages on this site."/>                        
+                <h:outputText value="We apologize.  The username is not in our database."/>                        
                 <h:link value="&lt;&lt; Back to Login Page" outcome="login" />
-                <c:if test="#{sec:isAuthenticated()}">
-                    <p>Logged in as: #{request.userPrincipal.name}<br/>
-                    <a href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">Just Log Me Out</a>
-                    </p>
-                </c:if>
+                <h:link value="&lt;&lt; Register for an account" outcome="userRegistration" />
             </h:panelGrid>
 
         </h:body>
