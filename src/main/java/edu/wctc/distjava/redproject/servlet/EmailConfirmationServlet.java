@@ -1,7 +1,9 @@
 package edu.wctc.distjava.redproject.servlet;
 
+import edu.wctc.distjava.redproject.service.UserRegistrationService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,34 +17,38 @@ import javax.servlet.http.HttpServletResponse;
  * 
  * @author Neal Sorenson
  */
-@WebServlet(name = "emailVerifier", urlPatterns = {"/emailVerifier"})
-public class EmailVerifierServlet extends HttpServlet {
+//@WebServlet(name = "emailVerifier", urlPatterns = {"/emailVerifier"})
+public class EmailConfirmationServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    private UserRegistrationService regService;
 
-    /**
-     * Processes requests for both HTTP
-     * <code>GET</code> and
-     * <code>POST</code> methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String errorMessage = "";
-        String destination = "";
+        String destination = "/faces/";
         
         try{
             String username = request.getParameter("user"); //get parameter from email
+            
             // do a search for username in database
-            // if found, send
+            String foundUser = regService.isUsernameInUse(username);
+            
+            // If found, send to verifyEmail page.  If not, send to emailerror page.
+            if (foundUser == null){
+                destination+="emailerror.xhtml";
+            } else {
+                destination+="verifyEmail.xhtml";
+            }
             
         } catch (Exception e){
             errorMessage += e.toString();
         }
+        
+        RequestDispatcher dispatcher =
+                    getServletContext().getRequestDispatcher(destination);
+                dispatcher.forward(request, response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

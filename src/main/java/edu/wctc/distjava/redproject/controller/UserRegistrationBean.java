@@ -111,7 +111,7 @@ public class UserRegistrationBean implements Serializable{
         
         try {
             emailer.sendEmail(email, username);
-            emailer.emailHQ(username, email, (firstName + " " + lastName), "");
+            emailer.emailHQ(username, email, (firstName + " " + lastName),"");
         } catch (Exception e){
             destination = "emailerror.xhtml";
             System.out.println(e.toString());
