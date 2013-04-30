@@ -9,6 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 /**
  * This servlet will be the destination of the email that is sent
@@ -20,7 +22,6 @@ import javax.servlet.http.HttpServletResponse;
 
 public class EmailConfirmationServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private UserRegistrationService regService;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -30,6 +31,15 @@ public class EmailConfirmationServlet extends HttpServlet {
         
         try{
             String username = request.getParameter("user"); //get parameter from email
+            
+            // Retrieve Spring ApplicationContext 
+            WebApplicationContext ctx =
+                   WebApplicationContextUtils
+                   .getWebApplicationContext(this.getServletContext());
+            
+            // get UserRegistrationService
+            UserRegistrationService regService = 
+                    (UserRegistrationService) ctx.getBean("UserRegistrationService");
             
             // do a search for username in database
             String foundUser = regService.isUsernameInUse(username);

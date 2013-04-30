@@ -10,20 +10,6 @@
     <application>
         <!-- JSF-Spring Integration -->
         <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
-        
-        <locale-config>
-            <default-locale>en</default-locale>
-        </locale-config>
-        <message-bundle>
-            resources.Messages
-        </message-bundle>
-        
-        <locale-config>
-            <default-locale>en</default-locale>
-        </locale-config>
-        <message-bundle>
-            resources.Messages_en
-        </message-bundle>
     </application>
     
     <!-- for spring security -->
