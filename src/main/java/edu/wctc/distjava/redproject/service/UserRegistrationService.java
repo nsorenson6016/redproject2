@@ -9,12 +9,14 @@ import edu.wctc.distjava.redproject.model.Users;
 import javax.inject.Inject;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Scope(value="request", proxyMode=ScopedProxyMode.TARGET_CLASS)
 @Transactional(readOnly=true)
+@Repository("userRegService")
 public class UserRegistrationService {
     @Inject
     IUserRegistrationEAO userRegEao;

@@ -39,7 +39,7 @@ public class EmailConfirmationServlet extends HttpServlet {
             
             // get UserRegistrationService
             UserRegistrationService regService = 
-                    (UserRegistrationService) ctx.getBean("UserRegistrationService");
+                    (UserRegistrationService) ctx.getBean("userRegService");
             
             // do a search for username in database
             String foundUser = regService.isUsernameInUse(username);
