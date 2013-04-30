@@ -61,7 +61,7 @@ public class RegistrationEmailer implements IEmailer, Serializable {
         String subject = "Registration - bitAWEctions";
         String message = ("Thank you for registering at bit AWEctions.  You only"
                 + " have one more thing to do.  Please to the following web site:"
-                + "\n\nlocalhost:8080/AuctionProject/faces/emailVerify.do?user=" + data.toString());
+                + "\n\nlocalhost:8080/AuctionProject/confirm.do?user=" + data.toString());
         
         emailMsg.setTo(userEmail);
         emailMsg.setSubject(subject);

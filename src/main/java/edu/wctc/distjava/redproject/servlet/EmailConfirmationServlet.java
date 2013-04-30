@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * 
  * @author Neal Sorenson
  */
-//@WebServlet(name = "emailVerifier", urlPatterns = {"/emailVerifier"})
+
 public class EmailConfirmationServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private UserRegistrationService regService;
