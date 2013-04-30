@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Scope(value="request", proxyMode=ScopedProxyMode.TARGET_CLASS)
 @Transactional(readOnly=true)
-@Repository("userRegService")
+
 public class UserRegistrationService {
     @Inject
     IUserRegistrationEAO userRegEao;

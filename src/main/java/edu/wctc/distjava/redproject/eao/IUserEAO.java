@@ -29,6 +29,6 @@ public interface IUserEAO {
     
     List<Users> findUserEntitiesByStatus();
     
-    
+    Users findUserByUserName (String name);
 
 }
