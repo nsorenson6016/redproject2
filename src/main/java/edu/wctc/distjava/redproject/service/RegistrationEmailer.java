@@ -11,6 +11,7 @@ import org.springframework.mail.MailException;
 import org.springframework.mail.MailSendException;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Service;
 
 /**
@@ -52,15 +53,19 @@ public class RegistrationEmailer implements IEmailer, Serializable {
      *                the NullPointerException.
      * 
      * variables: userEmail = user's email address
-     *                 data = not needed
+     *                 data = user's username
      */
     
     @Override
     public void sendEmail(String userEmail, Object data) throws MailException {
+        String username = data.toString();
+        byte[] codedUsername = Base64.encode(username.getBytes()); 
+        String base64CodedUsername = new String(codedUsername);
+        
         SimpleMailMessage emailMsg = new SimpleMailMessage(this.messageTemplate);
         String message = ("Thank you for registering at bit AWEctions.  You only"
                 + " have one more thing to do.  Please to the following web site:"
-                + "\n\nhttp://localhost:8080/AuctionProject/confirm.do?user=" + data.toString());
+                + "\n\nhttp://localhost:8080/AuctionProject/confirm.do?user=" + base64CodedUsername);
         
         emailMsg.setTo(userEmail);
         emailMsg.setText(message);

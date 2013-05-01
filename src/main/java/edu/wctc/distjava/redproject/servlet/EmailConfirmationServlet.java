@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.security.crypto.codec.Base64;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -32,7 +33,12 @@ public class EmailConfirmationServlet extends HttpServlet {
         String destination = "/faces/";
         
         try{
-            String username = request.getParameter("user"); //get parameter from email
+            //get parameter from email
+            String encodedUsername = request.getParameter("user"); 
+            //decode username
+            byte[] decodedUsername = Base64.decode(encodedUsername.getBytes());
+            // turn decoded username into a string
+            String username = new String(decodedUsername); 
             
             // Retrieve Spring ApplicationContext 
             WebApplicationContext ctx =
