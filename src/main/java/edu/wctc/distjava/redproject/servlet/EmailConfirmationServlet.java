@@ -3,6 +3,7 @@ package edu.wctc.distjava.redproject.servlet;
 import edu.wctc.distjava.redproject.eao.IUserEAO;
 import edu.wctc.distjava.redproject.model.Users;
 import edu.wctc.distjava.redproject.service.UserRegistrationService;
+import edu.wctc.distjava.redproject.service.UserService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -45,12 +46,12 @@ public class EmailConfirmationServlet extends HttpServlet {
                    WebApplicationContextUtils
                    .getWebApplicationContext(this.getServletContext());
             
-            // get UserRegistrationService
-            IUserEAO eao = 
-                    (IUserEAO) ctx.getBean("userEAO");
+            // get UserService
+            UserService service = 
+                    (UserService) ctx.getBean("userService");
             
             // do a search for username in database
-            Users foundUser = eao.findUserByUserName(username);
+            Users foundUser = service.findUserByUserName(username);
             
             // If found, enable user and send to verifyEmail page.  
             // If not, send to emailerror page.
