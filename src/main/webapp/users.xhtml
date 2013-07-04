@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--*************************************************************************
+
+CREATED BY: Neal Sorenson
+CREATED ON: 5/7/13
+
+**************************************************************************-->
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:sec="http://www.springframework.org/security/facelets/tags"
+    template="mainTemplate.xhtml">
+
+
+    <ui:define name="content">
+        <div align="center">
+
+            <h:form id="form" >
+
+                <p:growl id="messages" showDetail="true"/> 
+
+                <p:dataTable id="userTable" var="users" 
+                             value="#{userBean.allUsers}"
+                             rowKey="#{users.username}"
+                             editable="true">  
+
+                    <f:facet name="mainHeader">  
+                        Members  
+                    </f:facet>
+
+                    <p:ajax event="rowEdit" listener="#{userBean.rowEditted}"
+                            update=":form:messages" />
+
+                    <p:ajax event="rowEditCancel" 
+                            listener="#{userBean.cancelEdit}"
+                            update=":form:messages" />
+                    
+                    <p:column headerText="Username" style="width:40%">  
+                        <p:cellEditor>  
+                            <f:facet name="output">  
+                                <h:outputText value="#{users.username}" />  
+                            </f:facet>  
+                            <f:facet name="input">  
+                                <p:inputText value="#{users.username}" 
+                                             style="width:100%"/>  
+                            </f:facet>  
+                        </p:cellEditor>  
+                    </p:column>  
+                    
+                    <p:column headerText="Enabled" style="width:15%">  
+                        <p:cellEditor>  
+                            <f:facet name="output">  
+                                <p:selectBooleanCheckbox value="#{users.enabled}"
+                                                         disabled="true"/>  
+                            </f:facet>  
+                            <f:facet name="input">  
+                                <p:selectBooleanCheckbox value="#{users.enabled}" 
+                                                         style="width:100%"
+                                                         disabled="false"/>  
+                            </f:facet>  
+                        </p:cellEditor>  
+                    </p:column>  
+
+                    <p:column headerText="Role" style="width:35%">
+                        <p:cellEditor>
+                            <f:facet name="output">  
+                                <p:selectManyButton value="#{users.authorities}"
+                                                    disabled="true">
+                                    <f:selectItem itemLabel="Admin" itemValue="ROLE_ADMIN" />
+                                    <f:selectItem itemLabel="Member" itemValue="ROLE_MEMBER" />
+                                </p:selectManyButton> 
+                            </f:facet> 
+                            <f:facet name="input">  
+                                <p:selectManyButton value="#{users.authorities}"
+                                                    disabled ="false">
+                                    <f:selectItem itemLabel="Admin" itemValue="ROLE_ADMIN" />
+                                    <f:selectItem itemLabel="Member" itemValue="ROLE_MEMBER" />
+                                </p:selectManyButton> 
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column style="width:10%">  
+                        <p:rowEditor />  
+                    </p:column>
+                    
+                </p:dataTable>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>

@@ -9,6 +9,7 @@ import edu.wctc.distjava.redproject.model.Authorities;
 import edu.wctc.distjava.redproject.model.Users;
 import edu.wctc.distjava.redproject.service.IEmailer;
 import edu.wctc.distjava.redproject.service.UserRegistrationService;
+import edu.wctc.distjava.redproject.service.UserService;
 import edu.wctc.distjava.redproject.util.FacesUtils;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -26,8 +27,9 @@ import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
  * @author Owner@
  */
 @Named
-@Scope("request")
-public class UserRegistrationBean implements Serializable{
+@Scope("session")
+public class UserRegistrationBean implements Serializable {
+
     private String username = "";
     private String firstName;
     private String lastName;
@@ -43,58 +45,50 @@ public class UserRegistrationBean implements Serializable{
     private String userMessage = "";
     private String userCheck = "";
     private String IN_USE = "Username is already in use!";
+    private List<String> roleList;
+    
+    // added by Neal 
+    private boolean enabled;
+    
     @Inject
     private UserRegistrationService urService;
     private Users user;
-   
     @Autowired
     @Qualifier("regservice")
     private IEmailer emailer;
-    
+
     public void usernameInUse(ValueChangeEvent event) {
         user = new Users();
-        
+
         user.setUsername(username);
         username = user.getUsername();
         userCheck = urService.isUsernameInUse(username);
-        if(userCheck != null){
+        if (userCheck != null) {
             FacesUtils.addErrorMessage("Username is already in use!");
         }
-        
-        
-  }
-    
-    public void passwordsMatch(ValueChangeEvent event) {
-//       password = getPassword();
-//       confirmation = getConfirmation();
-       
-       if (password.equals(confirmation)){
-           FacesUtils.addErrorMessage("Passwords match.");
-       }else{
-           FacesUtils.addErrorMessage("Confirmation does not match password.");
-       }
-        
+
     }
-    
+
     private String encodeSha512(String pwd, String salt) {
-        
+
         ShaPasswordEncoder pe = new ShaPasswordEncoder(512);
         pe.setIterations(1024);
         String hash = pe.encodePassword(pwd, salt);
-        
+
         return hash;
-        
+
     }
-    
-    public String createNewUser (){
+
+    public String createNewUser() {
         user = new Users();
         user.setUsername(username);
         user.setPassword(encodeSha512(password, username));
         user.setEmail(email);
         user.setFirstName(firstName);
         user.setLastName(lastName);
+        user.setPhone(phoneNum);
         user.setAddress1(address);
-        user.setAddress2(address);
+        user.setAddress2(addressTwo);
         user.setCity(city);
         user.setState(state);
         user.setZip(zipCode);
@@ -105,24 +99,43 @@ public class UserRegistrationBean implements Serializable{
         auths.add(auth);
         user.setAuthoritiesCollection(auths);
         auth.setUsername(user.getUsername());
-        String destination = "registrationComplete";
-        
-        urService.createNewUser( user);
-        
+
+        String destination = "";
+
+        urService.createNewUser(user);
+
         try {
             emailer.sendEmail(email, username);
-            emailer.emailHQ(username, email, (firstName + " " + lastName),"");
-        } catch (Exception e){
-            destination = "emailerror.xhtml";
+            emailer.emailHQ(username, email, (firstName + " " + lastName), user.toString());
+            destination = "registrationComplete";
+        } catch (Exception e) {
+            destination = "emailerror";
             System.out.println(e.toString());
         }
-        
+
         return destination;
+
     }
 
-    
+    public void setRoles(List<String> roles) {
+        List<Authorities> auths = new ArrayList<Authorities>();
+        Authorities auth = new Authorities();
+        for (String role : roles) {
+            auth.setAuthority(role);
+        }
+        auths.add(auth);
+        user.setAuthoritiesCollection(auths);
+    }
+
+    public void enableUser(boolean enable) {
+        if (enable) {
+            user.setEnabled(true);
+        } else {
+            user.setEnabled(false);
+        }
+    }
+
     //GETTERS & SETTERS
-    
     public String getUsername() {
         return username;
     }
@@ -241,6 +254,14 @@ public class UserRegistrationBean implements Serializable{
 
     public void setUser(Users user) {
         this.user = user;
+    }
+
+    public boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
 }

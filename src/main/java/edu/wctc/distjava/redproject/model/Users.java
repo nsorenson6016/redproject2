@@ -1,8 +1,10 @@
 package edu.wctc.distjava.redproject.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -58,7 +60,8 @@ public class Users implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "enabled")
-    private boolean enabled;
+//    private boolean enabled;
+    private int enabled;
     @Size(max = 80)
     @Column(name = "address1")
     private String address1;
@@ -93,8 +96,8 @@ public class Users implements Serializable {
     private Date activeDate;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "username", fetch=FetchType.EAGER, orphanRemoval=true)
     private Collection<Authorities> authoritiesCollection;
-//    @OneToMany(mappedBy = "donatingUsername")
-//    private Collection<Product> productCollection;
+    @OneToMany(mappedBy = "donatingUsername")
+    private Collection<Product> productCollection;
 
     public Users() {
     }
@@ -106,7 +109,8 @@ public class Users implements Serializable {
     public Users(String username, String password, boolean enabled) {
         this.username = username;
         this.password = password;
-        this.enabled = enabled;
+        if (enabled) {this.enabled = 1;}
+            else {this.enabled = 0;}
     }
 
     public String getUsername() {
@@ -126,11 +130,13 @@ public class Users implements Serializable {
     }
 
     public boolean getEnabled() {
-        return enabled;
+        if (enabled==1) return true;
+        else return false;
     }
 
     public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+        if (enabled) {this.enabled = 1;}
+            else {this.enabled = 0;}
     }
 
     public String getAddress1() {
@@ -221,7 +227,32 @@ public class Users implements Serializable {
         this.authoritiesCollection = authoritiesCollection;
     }
 
-
+    /*
+     * gets all of the Authorities that a user has in the form of a list of strings.
+     * used by users.xhtml
+     */
+    public List<String> getAuthorities() {
+        List<String> authList = new ArrayList <String>();
+        for (Authorities a:authoritiesCollection){
+            authList.add(a.toString());
+        }
+        return authList;
+    }
+    
+    /*
+     * sets the authorities collection if a list of strings is entered.
+     * used by users.xhtml
+    */
+    public void setAuthorities(List<String> authList){
+        List<Authorities> auths = new ArrayList<Authorities>();
+        Authorities auth = new Authorities();
+        for (String s:authList){
+            auth.setAuthority(s);
+        }
+        auths.add(auth);
+        authoritiesCollection = auths;
+    }
+   
 
     @XmlTransient
 //    public Collection<Product> getProductCollection() {
@@ -252,9 +283,25 @@ public class Users implements Serializable {
         return true;
     }
 
+    // toString - method to return User as a string.  Used by the email sent to HQ.
     @Override
     public String toString() {
-        return "model.Users[ username=" + username + " ]";
+        // if there is nothing entered in the Address 2 box, the full address is Address 1 only.
+        String fullAddress = "";
+        if (address2==null || address2.equals("")){
+            fullAddress += address1;
+        }
+        else {
+            fullAddress += address1 + "\n" + address2;
+        }
+        
+        // returns username, full name, address, phone & email
+        return username + "\n\n"
+                + "Name: " + firstName + " " + lastName + "\n"
+                + "Address: " + fullAddress + "\n"
+                + "         " + city + ", " + state + "  " + zip + "\n"
+                + "Phone: " + phone+ "\n\n"
+                + email;
     }
     
-}
+} 
